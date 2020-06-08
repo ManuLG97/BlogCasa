@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
-class PostController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $users= User::all();
+        return view('users.users',compact('users'));
     }
 
     /**
@@ -56,7 +58,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user =  User::find($id);
+       // $users=User::all();
+        return view('users.edit',compact('user'));
     }
 
     /**
@@ -68,7 +72,13 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $users=User::find($id);
+        $users->update(['name'=>$request->name,
+            'email'=>$request->email,'password'=>$request->password
+//
+        ]);
+
+        return redirect()->route('usuarios.index');
     }
 
     /**
@@ -79,6 +89,9 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $users =  User::find($id);
+        $users->delete();
+
+        return redirect()->route('usuarios.index');
     }
 }

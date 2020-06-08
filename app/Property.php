@@ -9,6 +9,6 @@ class Property extends Model
     protected $fillable=['description','price','type','user_id','fotocasa'];
 
     public function user(){
-        return $this->belongsTo('App\User','owner_id');
+        return $this->belongsTo('App\User','user_id');
     }
 }

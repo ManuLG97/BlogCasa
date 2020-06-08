@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DeepCopy\Matcher\PropertyTypeMatcher;
 use Illuminate\Http\Request;
 use App\Property;
 use App\User;
@@ -23,7 +24,8 @@ class PropertyController extends Controller
     public function index()
     {
         $properties= Property::all();
-        return view('properties.index',compact('properties'));
+        $user = auth()->user()->id;
+        return view('properties.index',compact('properties', 'user'));
     }
 
     public function edit($id)
@@ -49,6 +51,17 @@ class PropertyController extends Controller
 
     }
 
+    public function show($id)
+    {
+        $property=Property::find($id);
+        $user=User::find($id);
+
+        return view("properties.show", compact('property'));
+
+
+    }
+
+
     public function store(Request $request)
     {
         $user_id = auth()->user()->id;
@@ -71,4 +84,15 @@ class PropertyController extends Controller
         return redirect()->route('propiedades.index');
 
     }
+
+
+    public static function  getUserName($id){
+        $user=User::all()->where('id',$id)->first();
+        return $user->name;
+    }
+    public static function  getUserEmail($id){
+        $user=User::all()->where('id',$id)->first();
+        return $user->email;
+    }
+
 }

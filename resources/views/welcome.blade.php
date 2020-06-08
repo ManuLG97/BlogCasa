@@ -66,9 +66,20 @@
     <body>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
-                <div class="top-right links">
+                                <div class="top-right links">
                     @auth
-                        <a href="{{ url('/propiedades') }}">Acceder a Propiedades</a>
+                                        @if(Auth::user()->hasRole('admin'))
+
+                                                <a href="{{ url('/propiedades') }}">Acceder a Propiedades</a>
+                                                <a href="{{ url('/usuarios') }}">Acceder a Usuarios</a>
+                                        @endif
+
+                                            @if(Auth::user()->hasRole('user'))
+
+                                                <a href="{{ url('/imuebles') }}">Acceder a Propiedades</a>
+
+                                            @endif
+
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -81,7 +92,10 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    CASASLG
+                    CASAS LG
+                </div>
+                <div >
+                    Tu pagina de compra de casas de confianza al mejor precio
                 </div>
 
 

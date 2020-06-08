@@ -17,19 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/manu', function (){
-    return "Hola Manu";
-});
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('manolo', function() {
-    return response('<p>ManuLG</p>', 200) ->header( 'Content-Type', 'text/html')
-        -> cookie ('blog' ,'asdasdasdasd',30);
-});
 
 Route::get('salir', function(){
     return redirect('login');
@@ -59,3 +52,7 @@ Route::put('post/{id}', function ($id) {
 })->middleware('auth', 'role:admin');
 
 Route::resource('propiedades','PropertyController');
+
+Route::resource('usuarios','UserController');
+
+Route::resource('imuebles', 'PropertyUserController');

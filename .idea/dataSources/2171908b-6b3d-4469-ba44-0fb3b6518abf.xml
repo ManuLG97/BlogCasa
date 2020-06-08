@@ -1474,6 +1474,7 @@
       <RefSchemaName>blog</RefSchemaName>
       <RefTableName>users</RefTableName>
       <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <column id="361" parent="330" name="id">
       <Position>1</Position>
